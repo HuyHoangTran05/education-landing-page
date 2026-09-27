@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khai Minh Academy — Học đúng cách, đi đúng đường</title>
+<meta name="description" content="Nền tảng học trực tuyến cùng gia sư chất lượng cao: lộ trình cá nhân hóa, lớp học nhỏ, phản hồi chi tiết mỗi tuần.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f4;
+    --surface:#ffffff;
+    --ink:#211f1c;
+    --ink-soft:rgba(33,31,28,.92);
+    --muted:#6b655c;
+    --faint:#a49d92;
+    --accent:#1f6f4f;
+    --accent-dark:#17563d;
+    --accent-tint:#eaf4ee;
+    --clay:#c4552d;
+    --clay-tint:#faeee8;
+    --border:1px solid rgba(33,31,28,.1);
+    --radius:12px;
+    --shadow-card:0 4px 18px rgba(33,31,28,.05), 0 2px 7px rgba(33,31,28,.035), 0 .8px 3px rgba(33,31,28,.03);
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --maxw:1120px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--accent-tint);color:var(--accent-dark)}
+  a{color:inherit}
+  img{max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.08;color:var(--ink-soft)}
+  h1{font-size:clamp(40px,5.6vw,64px);letter-spacing:-.02em;font-variation-settings:'SOFT' 0,'WONK' 1}
+  h2{font-size:clamp(30px,3.6vw,44px);letter-spacing:-.015em}
+  h3{font-size:21px;letter-spacing:-.01em;line-height:1.25}
+  p.lead{font-size:19px;color:var(--muted);line-height:1.6;max-width:56ch}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--font-body);font-size:15px;font-weight:600;
+    padding:13px 24px;border-radius:8px;border:var(--border);
+    text-decoration:none;cursor:pointer;transition:background .18s ease, transform .12s ease, box-shadow .18s ease;
+    min-height:44px;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .btn-primary{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 1px 2px rgba(23,86,61,.25)}
+  .btn-primary:hover{background:var(--accent-dark)}
+  .btn-ghost{background:transparent;color:var(--ink)}
+  .btn-ghost:hover{background:rgba(33,31,28,.05)}
+  .btn-lg{padding:16px 30px;font-size:16px}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,248,244,.85);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:var(--border);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:-.01em}
+  .logo-mark{
+    width:34px;height:34px;border-radius:9px;background:var(--accent);
+    display:grid;place-items:center;color:#fff;font-size:17px;font-weight:700;font-family:var(--font-display);
+  }
+  nav.links{display:flex;align-items:center;gap:28px}
+  nav.links a{font-size:15px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .15s}
+  nav.links a:hover{color:var(--ink)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav-cta .btn{padding:9px 18px;font-size:14px;min-height:40px}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--ink)}
+  .menu-toggle svg{display:block}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 96px;position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;top:-140px;right:-160px;width:480px;height:480px;border-radius:50%;
+    background:radial-gradient(circle, var(--accent-tint) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+  .hero h1{margin:18px 0 22px}
+  .hero h1 em{font-style:italic;color:var(--accent);font-variation-settings:'WONK' 1}
+  .hero .lead{margin-bottom:34px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{font-size:13.5px;color:var(--faint);margin-top:18px}
+
+  /* mock lesson card */
+  .mock{
+    background:var(--surface);border:var(--border);border-radius:16px;
+    box-shadow:0 14px 40px rgba(33,31,28,.08), 0 4px 14px rgba(33,31,28,.05);
+    padding:22px;position:relative;
+  }
+  .mock-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .mock-badge{background:var(--accent-tint);color:var(--accent-dark);font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;letter-spacing:.02em}
+  .mock-week{font-size:13px;color:var(--faint);font-weight:500}
+  .mock h4{font-family:var(--font-display);font-size:18px;font-weight:600;margin-bottom:16px}
+  .progress-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:14px}
+  .progress-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .dot.done{background:var(--accent)}
+  .dot.now{background:var(--clay);box-shadow:0 0 0 4px var(--clay-tint)}
+  .dot.next{background:rgba(33,31,28,.15)}
+  .progress-row .bar{flex:1;height:6px;border-radius:4px;background:rgba(33,31,28,.07);overflow:hidden}
+  .progress-row .bar i{display:block;height:100%;border-radius:4px;background:var(--accent)}
+  .progress-row span.lbl{width:150px;color:var(--muted);flex:none}
+  .mock-feedback{
+    margin-top:20px;padding:14px 16px;background:var(--bg);border:var(--border);border-radius:10px;
+    font-size:13.5px;color:var(--muted);line-height:1.55;
+  }
+  .mock-feedback b{color:var(--ink);font-weight:600}
+  .mock-float{
+    position:absolute;left:-26px;bottom:34px;background:var(--surface);border:var(--border);
+    border-radius:12px;box-shadow:var(--shadow-card);padding:12px 16px;display:flex;align-items:center;gap:10px;
+    font-size:13.5px;font-weight:600;
+  }
+  .mock-float .tick{width:24px;height:24px;border-radius:50%;background:var(--accent-tint);color:var(--accent-dark);display:grid;place-items:center;font-size:13px}
+
+  /* ---------- who-for strip ---------- */
+  .strip{background:var(--ink-soft);color:#f3efe8;padding:64px 0}
+  .strip-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+  .strip h2{color:#fff;font-size:clamp(26px,3vw,36px)}
+  .strip-points{display:flex;flex-direction:column;gap:22px}
+  .strip-point{display:flex;gap:14px;align-items:flex-start}
+  .strip-point .n{
+    font-family:var(--font-display);font-size:15px;font-weight:600;color:#e8c9a0;
+    border:1px solid rgba(232,201,160,.35);border-radius:8px;padding:4px 10px;flex:none;margin-top:2px;
+  }
+  .strip-point p{font-size:15px;color:rgba(243,239,232,.82);line-height:1.6}
+  .strip-point p b{color:#fff;font-weight:600}
+
+  /* ---------- courses (compare surface) ---------- */
+  .courses{padding:96px 0}
+  .section-head{max-width:640px;margin-bottom:48px}
+  .section-head h2{margin:14px 0 16px}
+  .course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+  .course-card{
+    background:var(--surface);border:var(--border);border-radius:var(--radius);
+    padding:28px;display:flex;flex-direction:column;box-shadow:var(--shadow-card);
+    transition:transform .2s ease, box-shadow .2s ease;position:relative;
+  }
+  .course-card:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(33,31,28,.09), 0 6px 16px rgba(33,31,28,.05)}
+  .course-card.featured{border:2px solid var(--accent)}
+  .flag{
+    position:absolute;top:-13px;left:24px;background:var(--accent);color:#fff;
+    font-size:12px;font-weight:600;padding:4px 12px;border-radius:999px;letter-spacing:.02em;
+  }
+  .course-tag{font-size:13px;font-weight:600;color:var(--clay);margin-bottom:10px}
+  .course-card h3{margin-bottom:8px}
+  .course-desc{font-size:14.5px;color:var(--muted);margin-bottom:22px;line-height:1.6}
+  .course-meta{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:26px}
+  .course-meta li{display:flex;gap:9px;font-size:14px;color:var(--muted);align-items:baseline}
+  .course-meta li::before{content:"—";color:var(--accent);flex:none}
+  .course-price{margin-top:auto;padding-top:20px;border-top:var(--border)}
+  .price-line{display:flex;align-items:baseline;gap:6px;margin-bottom:16px}
+  .price-line .amount{font-family:var(--font-display);font-size:28px;font-weight:700;letter-spacing:-.01em}
+  .price-line .per{font-size:13.5px;color:var(--faint)}
+  .course-card .btn{width:100%}
+
+  /* ---------- method (asymmetric steps) ---------- */
+  .method{padding:96px 0;background:var(--surface);border-top:var(--border);border-bottom:var(--border)}
+  .steps{margin-top:56px;display:flex;flex-direction:column}
+  .step{
+    display:grid;grid-template-columns:120px 1fr;gap:32px;align-items:start;
+    padding:36px 0;border-top:var(--border);
+  }
+  .step:first-child{border-top:none;padding-top:0}
+  .step .num{font-family:var(--font-display);font-size:44px;font-weight:600;color:var(--accent-tint);-webkit-text-stroke:1.5px var(--accent);letter-spacing:-.02em;line-height:1}
+  .step-body{max-width:62ch}
+  .step-body h3{margin-bottom:8px}
+  .step-body p{color:var(--muted);font-size:15.5px}
+  .step:nth-child(even) .step-body{margin-left:auto}
+  .step:nth-child(even){grid-template-columns:1fr 120px}
+  .step:nth-child(even) .num{order:2;text-align:right}
+  .step:nth-child(even) .step-body{order:1;text-align:right}
+
+  /* ---------- testimonials ---------- */
+  .voices{padding:96px 0}
+  .voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .voice{
+    background:var(--surface);border:var(--border);border-radius:var(--radius);
+    padding:32px;box-shadow:var(--shadow-card);
+  }
+  .voice blockquote{font-family:var(--font-display);font-size:19px;font-weight:400;line-height:1.5;letter-spacing:-.01em;color:var(--ink-soft);margin-bottom:24px}
+  .voice blockquote::before{content:"“";color:var(--accent)}
+  .voice blockquote::after{content:"”";color:var(--accent)}
+  .voice-author{display:flex;align-items:center;gap:12px}
+  .avatar{
+    width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+    font-family:var(--font-display);font-weight:700;font-size:16px;color:#fff;flex:none;
+  }
+  .av-1{background:var(--accent)}
+  .av-2{background:var(--clay)}
+  .voice-author .who{font-size:14.5px;font-weight:600}
+  .voice-author .role{font-size:13px;color:var(--faint)}
+
+  /* ---------- final CTA ---------- */
+  .cta{padding:96px 0 110px}
+  .cta-box{
+    background:var(--accent-tint);border:1px solid rgba(31,111,79,.2);
+    border-radius:20px;padding:64px 48px;text-align:center;position:relative;overflow:hidden;
+  }
+  .cta-box::after{
+    content:"";position:absolute;bottom:-90px;left:50%;transform:translateX(-50%);
+    width:420px;height:220px;border-radius:50%;background:rgba(31,111,79,.08);pointer-events:none;
+  }
+  .cta-box h2{margin:14px auto 16px;max-width:20ch}
+  .cta-box .lead{margin:0 auto 34px}
+  .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .cta-note{font-size:13.5px;color:var(--muted);margin-top:20px}
+
+  /* ---------- footer ---------- */
+  footer{border-top:var(--border);padding:48px 0 40px;background:var(--surface)}
+  .foot-grid{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand{max-width:30ch}
+  .foot-brand p{font-size:13.5px;color:var(--faint);margin-top:10px}
+  .foot-links{display:flex;gap:56px;flex-wrap:wrap}
+  .foot-col h5{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-bottom:14px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .foot-col a{font-size:14px;color:var(--muted);text-decoration:none}
+  .foot-col a:hover{color:var(--ink);text-decoration:underline}
+  .foot-bottom{margin-top:44px;padding-top:20px;border-top:var(--border);font-size:12.5px;color:var(--faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 960px){
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .hero{padding:56px 0 72px}
+    .strip-grid{grid-template-columns:1fr;gap:36px}
+    .course-grid{grid-template-columns:1fr;max-width:460px}
+    .voice-grid{grid-template-columns:1fr}
+    .step, .step:nth-child(even){grid-template-columns:72px 1fr}
+    .step:nth-child(even) .num{order:0;text-align:left}
+    .step:nth-child(even) .step-body{order:0;text-align:left;margin-left:0}
+    .step .num, .step:nth-child(even) .num{font-size:34px}
+    nav.links{display:none}
+    .nav-cta .btn-ghost{display:none}
+    .menu-toggle{display:block}
+    nav.links.open{
+      display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+      position:absolute;top:68px;left:0;right:0;background:var(--surface);
+      border-bottom:var(--border);padding:16px 24px 20px;box-shadow:0 16px 32px rgba(33,31,28,.08);
+    }
+    nav.links.open a{padding:12px 0;width:100%;font-size:16px}
+    .mock-float{left:-8px}
+  }
+  @media (max-width: 560px){
+    .wrap{padding:0 18px}
+    .cta-box{padding:48px 24px}
+    .hero-actions .btn{width:100%}
+    .hero-actions{flex-direction:column;align-items:stretch}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#">
+      <span class="logo-mark">K</span>
+      Khai Minh
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#khoa-hoc">Khóa học</a>
+      <a href="#phuong-phap">Phương pháp</a>
+      <a href="#hoc-vien">Học viên</a>
+      <a href="#lien-he">Liên hệ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#khoa-hoc">Xem khóa học</a>
+      <a class="btn btn-primary" href="#dang-ky">Học thử miễn phí</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Nền tảng học tập cá nhân hóa</span>
+        <h1>Học đúng cách,<br><em>đi đúng đường</em></h1>
+        <p class="lead">Lộ trình riêng cho từng học viên, lớp học tối đa 8 người, và phản hồi chi tiết từ gia sư sau mỗi buổi học. Không video đại trà, không học vẹt.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#dang-ky">Đăng ký học thử miễn phí</a>
+          <a class="btn btn-ghost btn-lg" href="#phuong-phap">Tìm hiểu phương pháp →</a>
+        </div>
+        <p class="hero-note">Không cần thẻ · Xếp lớp trong 48 giờ · Học online hoặc tại nhà</p>
+      </div>
+      <div class="mock reveal" aria-hidden="true">
+        <div class="mock-head">
+          <span class="mock-badge">Lộ trình của bạn</span>
+          <span class="mock-week">Tuần 6 / 12</span>
+        </div>
+        <h4>Toán nền tảng → Tư duy ứng dụng</h4>
+        <div class="progress-row"><span class="dot done"></span><span class="lbl">Đại cương hàm số</span><span class="bar"><i style="width:100%"></i></span></div>
+        <div class="progress-row"><span class="dot done"></span><span class="lbl">Đạo hàm & ứng dụng</span><span class="bar"><i style="width:100%"></i></span></div>
+        <div class="progress-row"><span class="dot now"></span><span class="lbl">Tối ưu hóa</span><span class="bar"><i style="width:45%"></i></span></div>
+        <div class="progress-row"><span class="dot next"></span><span class="lbl">Xác suất thống kê</span><span class="bar"><i style="width:0%"></i></span></div>
+        <div class="mock-feedback">
+          <b>Nhận xét buổi gần nhất:</b> “Em nắm chắc phần quy tắc chuỗi. Tuần sau cô sẽ nâng độ khó bài tập tối ưu — mục tiêu là tự giải được dạng bài thực tế.”
+        </div>
+        <div class="mock-float">
+          <span class="tick">✓</span>
+          Buổi học đã hoàn thành
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO FOR -->
+  <section class="strip">
+    <div class="wrap strip-grid">
+      <h2 class="reveal">Dành cho người học nghiêm túc — không phải người xem video cho có.</h2>
+      <div class="strip-points">
+        <div class="strip-point reveal"><span class="n">01</span><p><b>Học viên mất gốc, cần lấy lại nền tảng.</b> Kiểm tra đầu vào miễn phí, xếp lớp theo đúng trình độ thực tế.</p></div>
+        <div class="strip-point reveal"><span class="n">02</span><p><b>Sinh viên và người đi làm chuyển ngành.</b> Lộ trình 12 tuần có mục tiêu rõ ràng cho từng giai đoạn.</p></div>
+        <div class="strip-point reveal"><span class="n">03</span><p><b>Phụ huynh muốn theo sát tiến bộ của con.</b> Báo cáo hàng tuần, trao đổi trực tiếp với gia sư phụ trách.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="courses" id="khoa-hoc">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Khóa học</span>
+        <h2>Ba lộ trình, một nguyên tắc: lớp nhỏ, kèm sát</h2>
+        <p class="lead">Mỗi khóa học gồm buổi học trực tiếp với gia sư, bài tập được chấm và sửa chi tiết, cùng một buổi tổng duyệt mỗi tháng.</p>
+      </div>
+      <div class="course-grid">
+        <article class="course-card reveal">
+          <span class="course-tag">Nền tảng</span>
+          <h3>Toán tư duy</h3>
+          <p class="course-desc">Xây nền đại số, hàm số và lập luận logic cho học sinh cấp 2–3 hoặc người mất gốc.</p>
+          <ul class="course-meta">
+            <li>2 buổi/tuần · 90 phút</li>
+            <li>Lớp tối đa 8 học viên</li>
+            <li>12 tuần · có kiểm tra xếp lớp</li>
+          </ul>
+          <div class="course-price">
+            <div class="price-line"><span class="amount">890.000₫</span><span class="per">/ tháng</span></div>
+            <a class="btn btn-ghost" href="#dang-ky">Chọn khóa này</a>
+          </div>
+        </article>
+
+        <article class="course-card featured reveal">
+          <span class="flag">Phổ biến nhất</span>
+          <span class="course-tag">Chuyển đổi</span>
+          <h3>Tiếng Anh học thuật</h3>
+          <p class="course-desc">Luyện đọc–viết học thuật, thuyết trình và phản biện. Phù hợp du học, IELTS, môi trường làm việc quốc tế.</p>
+          <ul class="course-meta">
+            <li>3 buổi/tuần · 90 phút</li>
+            <li>Lớp tối đa 6 học viên</li>
+            <li>Gia sư chấm bài viết trong 24 giờ</li>
+            <li>Một kèm một 30 phút mỗi tháng</li>
+          </ul>
+          <div class="course-price">
+            <div class="price-line"><span class="amount">1.490.000₫</span><span class="per">/ tháng</span></div>
+            <a class="btn btn-primary" href="#dang-ky">Học thử miễn phí</a>
+          </div>
+        </article>
+
+        <article class="course-card reveal">
+          <span class="course-tag">Ứng dụng</span>
+          <h3>Lập trình & dữ liệu</h3>
+          <p class="course-desc">Từ Python căn bản đến phân tích dữ liệu thực tế qua dự án nhỏ có hướng dẫn từng bước.</p>
+          <ul class="course-meta">
+            <li>2 buổi/tuần · 120 phút</li>
+            <li>Lớp tối đa 8 học viên</li>
+            <li>3 dự án thực hành trong khóa</li>
+          </ul>
+          <div class="course-price">
+            <div class="price-line"><span class="amount">1.290.000₫</span><span class="per">/ tháng</span></div>
+            <a class="btn btn-ghost" href="#dang-ky">Chọn khóa này</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section class="method" id="phuong-phap">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Phương pháp</span>
+        <h2>Vì sao lớp nhỏ hiệu quả hơn video đại trà</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="num">01</span>
+          <div class="step-body">
+            <h3>Đo đúng trình độ, xếp đúng lớp</h3>
+            <p>Bài kiểm tra đầu vào 45 phút xác định chính xác lỗ hổng kiến thức. Bạn không học lại thứ đã biết, cũng không bị bỏ lại phía sau.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="num">02</span>
+          <div class="step-body">
+            <h3>Học bằng cách được hỏi lại</h3>
+            <p>Trong lớp tối đa 8 người, gia sư gọi tên từng học viên mỗi buổi. Kiến thức chỉ được tính là “đã học” khi bạn tự giải thích lại được.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="num">03</span>
+          <div class="step-body">
+            <h3>Phản hồi viết, không phải điểm số</h3>
+            <p>Mỗi bài tập được sửa chi tiết bằng nhận xét: chỗ nào sai tư duy, chỗ nào chỉ sai kỹ thuật. Báo cáo tiến bộ gửi hàng tuần cho học viên và phụ huynh.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="num">04</span>
+          <div class="step-body">
+            <h3>Điều chỉnh lộ trình mỗi tháng</h3>
+            <p>Buổi tổng duyệt cuối tháng quyết định: giữ tốc độ, tăng độ khó, hay dành thêm thời gian cho phần còn yếu. Lộ trình là tài liệu sống, không phải cam kết cứng.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICES -->
+  <section class="voices" id="hoc-vien">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Học viên</span>
+        <h2>Người học nói gì</h2>
+      </div>
+      <div class="voice-grid">
+        <div class="voice reveal">
+          <blockquote>Trước đây em học ba trung tâm đều theo kiểu ngồi nghe và chép. Ở đây buổi nào cũng phải trình bày cách giải của mình, nên lần đầu tiên em biết mình hổng ở đâu.</blockquote>
+          <div class="voice-author">
+            <span class="avatar av-1">M</span>
+            <div><div class="who">Minh Anh</div><div class="role">Học sinh lớp 11 · Khóa Toán tư duy</div></div>
+          </div>
+        </div>
+        <div class="voice reveal">
+          <blockquote>Tôi đi làm mười năm mới học lại tiếng Anh. Điều giữ tôi ở lại là bài viết nào cũng được sửa chi tiết trong một ngày — biết sai ở đâu thì mới sửa được.</blockquote>
+          <div class="voice-author">
+            <span class="avatar av-2">Q</span>
+            <div><div class="who">Anh Quân</div><div class="role">Kỹ sư phần mềm · Khóa Tiếng Anh học thuật</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="dang-ky">
+    <div class="wrap">
+      <div class="cta-box reveal">
+        <span class="eyebrow">Bắt đầu</span>
+        <h2>Một buổi học thử, biết ngay có hợp hay không</h2>
+        <p class="lead">Ngồi học thật cùng lớp, gặp gia sư thật, nhận bài kiểm tra xếp lớp miễn phí. Không thu phí, không ràng buộc.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary btn-lg" href="mailto:hello@khaiminh.example?subject=Dang%20ky%20hoc%20thu">Đăng ký học thử miễn phí</a>
+          <a class="btn btn-ghost btn-lg" href="#khoa-hoc">So sánh các khóa học</a>
+        </div>
+        <p class="cta-note">Hoặc gọi 1900 0000 · Thứ Hai–Thứ Bảy, 8:00–20:00</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="lien-he">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#"><span class="logo-mark">K</span> Khai Minh</a>
+        <p>Nền tảng học tập cá nhân hóa: lớp nhỏ, gia sư kèm sát, phản hồi chi tiết mỗi tuần.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h5>Khóa học</h5>
+          <ul>
+            <li><a href="#khoa-hoc">Toán tư duy</a></li>
+            <li><a href="#khoa-hoc">Tiếng Anh học thuật</a></li>
+            <li><a href="#khoa-hoc">Lập trình & dữ liệu</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h5>Về chúng tôi</h5>
+          <ul>
+            <li><a href="#phuong-phap">Phương pháp</a></li>
+            <li><a href="#hoc-vien">Học viên</a></li>
+            <li><a href="mailto:hello@khaiminh.example">Liên hệ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Khai Minh Academy · Trang demo — nội dung mẫu</span>
+      <span>Xây dựng bởi Hermes Agent</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Scroll reveal (respects prefers-reduced-motion via CSS transition:none)
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
+</script>
+</body>
+</html>
